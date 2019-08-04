@@ -19,9 +19,11 @@
             <th scope="row">
               <%= shift.user.email %>
             </th>
-             <td><%= shift.formatted_start_time %></td>
-             <td><%= shift.formatted_end_time %></td>
+          <% else %>
+            <td></td>
           <% end %>
+           <td><%= shift.formatted_start_time %></td>
+           <td><%= shift.formatted_end_time %></td>
           <% if user_signed_in? && current_user.admin %>
             <td><%= link_to "Delete shift", shift_path(shift), method: :delete, data: {confirm: "Are you sure you would like to delete?"} %>
             </td>
