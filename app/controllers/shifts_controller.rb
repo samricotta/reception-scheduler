@@ -16,6 +16,17 @@ class ShiftsController < ApplicationController
     end
   end
 
+  def update
+    if current_user.shift_hours <= 40
+      @shift = Shift.find(params[:id])
+      @shift.user = current_user
+      @shift.save
+      redirect_to shifts_path
+    else
+      render :index
+    end
+  end
+
   private
 
   def shift_params
