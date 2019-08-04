@@ -7,6 +7,15 @@ class Shift < ApplicationRecord
   validates_time :end_time, :on_or_before => ['0:00am','3:00am'], :on_or_before_message => 'must be before closing time'
   validate :number_of_hours_below_8
 
+
+  def formatted_start_time
+    start_time.strftime("%A #{start_time.day.ordinalize} %B - %H:%M")
+  end
+
+  def formatted_end_time
+    end_time.strftime("%A #{end_time.day.ordinalize} %B - %H:%M")
+  end
+
   private
 
   def number_of_hours_below_8
