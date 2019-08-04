@@ -1,17 +1,39 @@
-<h1>Shifts</h1>
-<% @shifts.each do |shift| %>
-  <p>
-    <% if shift.user %>
-      <%= shift.user.email %>
-    <% else %>
-      <%= link_to "Take this shift", shift_path(shift), method: :patch %>
-    <% end %>
-     <%= shift.formatted_start_time %>
-     <%= shift.formatted_end_time %>
-    <%= link_to "Delete shift", shift_path(shift), method: :delete, data: {confirm: "Are you sure you would like to delete?"} %>
-  </p>
-<% end %>
-
-<%= link_to "New shift", new_shift_path %>
-
-
+<div class="container">
+  <h1>Shifts</h1>
+  <% if user_signed_in? && current_user.admin %>
+    <%= link_to "New shift", new_shift_path, class: "btn btn-dark" %>
+  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Employee</th>
+        <th scope="col">Start time</th>
+        <th scope="col">End time</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @shifts.each do |shift| %>
+        <tr>
+          <% if shift.user %>
+            <th scope="row">
+              <%= shift.user.email %>
+            </th>
+             <td><%= shift.formatted_start_time %></td>
+             <td><%= shift.formatted_end_time %></td>
+          <% end %>
+          <% if user_signed_in? && current_user.admin %>
+            <td><%= link_to "Delete shift", shift_path(shift), method: :delete, data: {confirm: "Are you sure you would like to delete?"} %>
+            </td>
+          <% elsif !shift.user %>
+            <td>
+              <%= link_to "Take this shift", shift_path(shift), method: :patch %>
+            </td>
+          <% else %>
+            <td>Confirmed</td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
