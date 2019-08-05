@@ -3,7 +3,7 @@
   <% if user_signed_in? && current_user.admin %>
     <%= link_to "New shift", new_shift_path, class: "btn btn-dark" %>
   <% end %>
-   <%= current_user.shift_hours %>
+   Total hours for the week <%= current_user.shift_hours %>
   <table class="table">
     <thead>
       <tr>
