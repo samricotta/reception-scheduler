@@ -1,6 +1,8 @@
 class Shift < ApplicationRecord
   belongs_to :user, optional: true
 
+  # pair of shift with same start_time / end_time is not valid
+  validates :start_time, :uniqueness => {:scope => :end_time}
   validates :start_time, presence: true
   validates :end_time, presence: true
   validates_time :start_time, :on_or_after => '7:00am', :on_or_after_message => 'must be after opening time'
@@ -14,6 +16,10 @@ class Shift < ApplicationRecord
 
   def formatted_end_time
     end_time.strftime("%A #{end_time.day.ordinalize} %B - %H:%M")
+  end
+
+  def hours
+    (end_time.to_time - start_time) / 1.hours
   end
 
   private

@@ -1,6 +1,6 @@
 class ShiftsController < ApplicationController
   def index
-    @shifts = Shift.all
+    @shifts = Shift.order(start_time: :asc)
   end
 
   def new
@@ -18,7 +18,7 @@ class ShiftsController < ApplicationController
 
   def update
     @shift = Shift.find(params[:id])
-    if current_user.shift_hours <= 40 + (@shift.end_time.to_time - @shift.start_time) / 1.hours
+    if current_user.shift_hours + @shift.hours <= 40
       @shift.user = current_user
       @shift.save
       redirect_to shifts_path
