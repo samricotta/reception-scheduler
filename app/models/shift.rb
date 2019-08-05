@@ -20,7 +20,7 @@ class Shift < ApplicationRecord
 
   def number_of_hours_below_8
     total_hours = ((end_time.to_time - start_time) / 1.hours)
-    if total_hours >= 8
+    if total_hours > 8
       self.errors[:base] << "Shift cannot be anymore more than 8 hours, its now #{total_hours.to_i} hours"
     end
   end

@@ -17,13 +17,14 @@ class ShiftsController < ApplicationController
   end
 
   def update
-    if current_user.shift_hours <= 40
-      @shift = Shift.find(params[:id])
+    @shift = Shift.find(params[:id])
+    if current_user.shift_hours <= 40 + (@shift.end_time.to_time - @shift.start_time) / 1.hours
       @shift.user = current_user
       @shift.save
       redirect_to shifts_path
     else
-      render :index
+      flash[:notice] = "You cannot work more than 40 hours per week, you currently have scheduled #{current_user.shift_hours.to_i} hours"
+      redirect_to shifts_path
     end
   end
 
