@@ -4,13 +4,11 @@ RSpec.describe Shift, type: :model do
   # zone = ActiveSupport::TimeZone.new('Hawaii')
   # Time.stub(:now){ Time.new.in_time_zone(zone) }
 
-  # context 'when requesting the shifts page' do
-    it 'displays start time with user timezone', tz: 'Pacific Time (US & Canada)' do
-      user_timezone = 'Brasilia'
+  context 'when requesting the shifts page' do
       # start_date = Time.zone.parse('2017-12-31 23:00:00')
       day = Time.zone.now
       p start_time = DateTime.new(day.year, day.month, day.day , 8, 0, 0)
-      p end_time = DateTime.new(day.year, day.month, day.day , 10, 0, 0)
+      p end_time = DateTime.new(day.year, day.month, day.day , 9, 0, 0)
       shift = Shift.create(start_time: start_time, end_time: end_time)
       p shift
       # it { is_expected.to validates_time(:start_time).between(['0:00am', '3:00am']) }
