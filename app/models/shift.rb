@@ -3,7 +3,6 @@ class Shift < ApplicationRecord
 
   validates :start_time, :uniqueness => {:scope => :end_time}
   validates :start_time, :end_time, presence: true
-  # validates_time :start_time, :on_or_after => '7:00am', :on_or_after_message => 'must be after opening time'
   validate :within_opening_hours
   validate :number_of_hours_below_8
   validate :user_less_than_40_hours
