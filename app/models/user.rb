@@ -10,7 +10,7 @@ class User < ApplicationRecord
     monday = Date.today.beginning_of_week
     collected_shifts = shifts.where('start_time > ?', monday).all
     collected_shifts.each do |shift|
-      total_hours += (shift.end_time.to_time - shift.start_time) / 1.hours
+      total_hours += shift.hours
     end
     total_hours
   end

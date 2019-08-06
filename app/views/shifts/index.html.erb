@@ -4,6 +4,11 @@
     <%= link_to "New shift", new_shift_path, class: "btn btn-dark" %>
   <% end %>
    Total hours for the week <%= current_user.shift_hours.to_i %>
+  <% if @shift && @shift.errors %>
+    <%@shift.errors.full_messages.each do |m| %>
+      <p><%= m %></p>
+    <% end %>
+  <% end %>
   <table class="table">
     <thead>
       <tr>

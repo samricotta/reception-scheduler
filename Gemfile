@@ -16,7 +16,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 gem 'faker'
-gem 'validates_timeliness', '~> 5.0.0.alpha3'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'
@@ -25,6 +25,7 @@ end
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.8'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

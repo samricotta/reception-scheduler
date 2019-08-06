@@ -60,6 +60,7 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    diff-lcs (1.3)
     dotenv (2.7.5)
     dotenv-rails (2.7.5)
       dotenv (= 2.7.5)
@@ -92,7 +93,7 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
-    msgpack (1.3.0)
+    msgpack (1.3.1)
     nio4r (2.4.0)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
@@ -129,7 +130,7 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.0.4)
+    rails-html-sanitizer (1.1.0)
       loofah (~> 2.2, >= 2.2.2)
     railties (5.2.3)
       actionpack (= 5.2.3)
@@ -145,6 +146,23 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rspec-core (3.8.2)
+      rspec-support (~> 3.8.0)
+    rspec-expectations (3.8.4)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-mocks (3.8.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-rails (3.8.2)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.8.0)
+      rspec-expectations (~> 3.8.0)
+      rspec-mocks (~> 3.8.0)
+      rspec-support (~> 3.8.0)
+    rspec-support (3.8.2)
     sassc (2.0.1)
       ffi (~> 1.9)
       rake
@@ -171,13 +189,10 @@ GEM
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.9)
-    timeliness (0.4.3)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
-    validates_timeliness (5.0.0.alpha4)
-      timeliness (>= 0.3.10, < 1)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
@@ -211,12 +226,12 @@ DEPENDENCIES
   puma
   rails (= 5.2.3)
   redis
+  rspec-rails (~> 3.8)
   sassc-rails
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
   uglifier
-  validates_timeliness (~> 5.0.0.alpha3)
   web-console (>= 3.3.0)
   webpacker
 
