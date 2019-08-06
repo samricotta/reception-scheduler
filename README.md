@@ -38,5 +38,3 @@ password: 123456
 ## Testing
 - Run ```rspec``` to test the tests that have been written for `Shift` and `User`.
 
-## Validations
-- These have been created in the models of both `Shift` and `User`.

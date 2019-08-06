@@ -33,7 +33,7 @@
           <% if user_signed_in? && current_user.admin %>
             <td><%= link_to "Delete shift", shift_path(shift), method: :delete, data: {confirm: "Are you sure you would like to delete?"} %>
             </td>
-          <% elsif !shift.user %>
+          <% elsif shift.user.nil? %>
             <td>
               <%= link_to "Take this shift", shift_path(shift), method: :patch %>
             </td>

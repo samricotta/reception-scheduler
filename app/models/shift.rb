@@ -3,6 +3,7 @@ class Shift < ApplicationRecord
 
   validates :start_time, :uniqueness => {:scope => :end_time}
   validates :start_time, :end_time, presence: true
+
   validate :within_opening_hours
   validate :number_of_hours_below_8
   validate :user_less_than_40_hours
@@ -33,15 +34,14 @@ class Shift < ApplicationRecord
   end
 
   def number_of_hours_below_8
-    total_hours = hours
-    if total_hours > 8
-      self.errors[:base] << "Shift cannot be anymore more than 8 hours, its now #{total_hours.to_i} hours"
+    if hours > 8
+      self.errors[:base] << "Shift cannot be anymore more than 8 hours, its now #{hours.to_i} hours"
     end
   end
 
   def user_less_than_40_hours
     if user && user.shift_hours + hours > 40
-      self.errors[:base] << "You cannot work more than 40 hours per week, you currently have scheduled"
+      self.errors[:base] << "You cannot work more than 40 hours per week"
     end
   end
 end
