@@ -3,6 +3,7 @@ class Shift < ApplicationRecord
 
   validates :start_time, :uniqueness => {:scope => :end_time}
   validates :start_time, :end_time, presence: true
+  # validates_time :start_time, :on_or_after => '7:00am', :on_or_after_message => 'must be after opening time'
   validate :within_opening_hours
   validate :number_of_hours_below_8
   validate :user_less_than_40_hours
@@ -24,11 +25,10 @@ class Shift < ApplicationRecord
 
   def within_opening_hours
     if start_time > end_time
-      self.errors[:base] << "Start time must be before end time"
+      self.errors[:base] << "Start time must be before end"
     end
     latest = DateTime.new(start_time.year, start_time.month, start_time.day + 1, 3, 0, 0)
-    earliest = DateTime.new(start_time.year, start_time.month, start_time.day, 7, 0, 0)
-    if (end_time.day != start_time.day && end_time > latest) || (start_time.day == end_time.day  && start_time < earliest)
+    if (end_time.day != start_time.day && end_time > latest) || ( start_time.hour >= 3  && start_time.hour < 7) || (end_time.hour > 3 && end_time.hour < 7)
       self.errors[:base] << "Shift is not within opening hours"
     end
   end
