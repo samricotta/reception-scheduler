@@ -1,13 +1,11 @@
 class Shift < ApplicationRecord
   belongs_to :user, optional: true
 
-  # pair of shift with same start_time / end_time is not valid
   validates :start_time, :uniqueness => {:scope => :end_time}
-  validates :start_time, presence: true
-  validates :end_time, presence: true
-  validates_time :start_time, :on_or_after => '7:00am', :on_or_after_message => 'must be after opening time'
-  validates_time :end_time, :on_or_before => ['0:00am','3:00am'], :on_or_before_message => 'must be before closing time'
+  validates :start_time, :end_time, presence: true
+  validate :within_opening_hours
   validate :number_of_hours_below_8
+  validate :user_less_than_40_hours
 
 
   def formatted_start_time
@@ -24,10 +22,27 @@ class Shift < ApplicationRecord
 
   private
 
+  def within_opening_hours
+    if start_time > end_time
+      self.errors[:base] << "Start time must be before end time"
+    end
+    latest = DateTime.new(start_time.year, start_time.month, start_time.day + 1, 3, 0, 0)
+    earliest = DateTime.new(start_time.year, start_time.month, start_time.day, 7, 0, 0)
+    if (end_time.day != start_time.day && end_time > latest) || (start_time.day == end_time.day  && start_time < earliest)
+      self.errors[:base] << "Shift is not within opening hours"
+    end
+  end
+
   def number_of_hours_below_8
-    total_hours = ((end_time.to_time - start_time) / 1.hours)
+    total_hours = hours
     if total_hours > 8
       self.errors[:base] << "Shift cannot be anymore more than 8 hours, its now #{total_hours.to_i} hours"
+    end
+  end
+
+  def user_less_than_40_hours
+    if user && user.shift_hours + hours > 40
+      self.errors[:base] << "You cannot work more than 40 hours per week, you currently have scheduled"
     end
   end
 end

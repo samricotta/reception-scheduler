@@ -16,8 +16,6 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 gem 'faker'
-gem 'validates_timeliness'
-gem 'rspec-validates_timeliness'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
