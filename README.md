@@ -1,8 +1,8 @@
 # Reception Scheduler
-A scheduling system for that helps manage the rota for the Shoreditch House reception desk. The system allows employees to book shifts.
+A scheduling system for that helps manage the rota for the reception desk. The system allows employees to book shifts.
 
 ## Rules
-- Shoreditch House is open from 7am until 3am, 7 days a week
+- Venue is open from 7am until 3am, 7 days a week
 - There is only one member of staff on shift at a time
 - Shifts can be a maximum of 8 hours long
 - An employee can work a maximum of 40 hours per week
